@@ -31,34 +31,34 @@ public class PersonWebController {
     public String createPerson(@PathVariable int id, Model model) {
         Person person = personService.get(id).orElse(null);
         if (person == null) {
-            return "404";
+            return "error";
         }
-        model.addAttribute("person", person);
-        return "person";
+        model.addAttribute("persons", person);
+        return "index";
     }
 
-    @PostMapping("/create")
+    @GetMapping("/create")
     public String createPerson(Model model) {
         model.addAttribute("person", new Person());
         return "personForm";
     }
 
-    @PutMapping("/save")
+    @PostMapping("/save")
     public String updatePerson(@ModelAttribute Person person, Model model) {
         Optional<Person> optionalPerson = personService.get(person.getId());
         optionalPerson.ifPresentOrElse((
                 p -> personService.update(person)), () -> personService.create(person));
-        return "redirect:/person/" + person.getId();
+        return "redirect:/tp2/persons/" + person.getId();
     }
 
-    @DeleteMapping("/{id}")
+    @GetMapping("/delete/{id}")
     public String deletePerson(@PathVariable int id, Model model) {
-        Optional<Person> person = personService.get(id);
+        Optional<Person> person = Optional.ofNullable(personService.get(id).orElse(null));
         if (person == null) {
             return "404";
         }
         personService.delete(id);
-        return "index";
+        return "redirect:/tp2/persons";
     }
 
 }

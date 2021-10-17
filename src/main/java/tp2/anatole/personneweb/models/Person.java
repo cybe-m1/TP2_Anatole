@@ -1,34 +1,17 @@
 package tp2.anatole.personneweb.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
     private int id;
     private String name, firstname;
-
-    public Person(int id, String name, String firstname) {
-        this.id = id;
-        this.name = name;
-        this.firstname = firstname;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
 
     @Override
     public String toString() {
